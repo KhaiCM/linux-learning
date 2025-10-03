@@ -1,0 +1,31 @@
+- yy - yank (copy) a line
+- 2yy - yank (copy) 2 lines
+---
+- dd - delete (cut) a line
+- 2dd - delete (cut) 2 lines
+- :3,5d - delete lines starting from 3 to 5
+---
+v- khởi động chế độ trực quan, đánh dấu các dòng, sau đó thực hiện lệnh (như - y-yank)
+- V- bắt đầu chế độ trực quan theo dòng
+---
+- u - undo
+- U - restore (undo) last changed line
+- Ctrl + r - redo
+---
+- gg - go to the first line of the document
+- G - go to the last line of the document
+- 5gg or 5G - go to line 5
+- Ctrl + d - move cursor and screen down 1/2 page
+- Ctrl + u - move cursor and screen up 1/2 page
+---
+- i- chèn trước con trỏ
+- I- chèn vào đầu dòng
+- a- chèn (thêm) sau con trỏ
+- A- chèn (thêm) vào cuối dòng
+- o- thêm (mở) một dòng mới bên dưới dòng hiện tại
+- O- thêm (mở) một dòng mới phía trên dòng hiện tại
+---
+- Ctrl+ ws- chia cửa sổ
+- Ctrl+ wv- chia cửa sổ theo chiều dọc
+- Ctrl+ ww- chuyển đổi cửa sổ
+- Ctrl+ wq- thoát khỏi cửa sổ

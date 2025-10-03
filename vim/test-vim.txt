@@ -1,0 +1,91 @@
+What is Model Context Protocol?
+Model Context Protocol, which is an open standard developed by Anthropic for connecting AI assistants to external data sources and tools. It allows AI models to securely access things like databases, APIs, file systems, and other services through a standardized interface, enabling more capable and contextual AI interactions while maintaining security and control over data access.
+
+Comparison with other protocols like Http
+Consider a scenario where you have to create 100 repos in github as a software engineer. The approach would be to access the api that github as an organization maintains. It would have been same for automating something in cloud as well.
+
+Why is it required?
+Standardization
+Similar to other protocol there is requirement for standard rules being followed when requests are carried out by llms as well.
+Context awareness
+Unlike software engineers using tools, the LLM must be provided with context for it know the whole situation (example for context would be databases if it involves one)
+Security
+There should be a proper way of authenticating the models similar to authenticating engineer with the aid of tokens or passwords.
+Abstraction
+Instead of the AI needing to know the specific details of each API it wants to use, MCP provides a standardized layer that hides complexity behind simple, semantic tool calls.
+
+
+const questionParser = (rawHtmlString = '') => {
+  if (rawHtmlString.indexOf("html('')") > 0) {
+    return [];
+  }
+
+  const htmlString = rawHtmlString.substring(rawHtmlString.indexOf('<tr'), rawHtmlString.lastIndexOf("');"));
+
+  const html = parse(
+    htmlString.replaceAll('\\"', '"').replaceAll('\\/', '/').replaceAll('\\n', '').replace(/\s+/g, ' ')
+  );
+
+  return html.querySelectorAll('.choose_question').map((childNode) => childNode.getAttribute('id'));
+};
+
+What is Model Context Protocol?
+Model Context Protocol, which is an open standard developed by Anthropic for connecting AI assistants to external data sources and tools. It allows AI models to securely access things like databases, APIs, file systems, and other services through a standardized interface, enabling more capable and contextual AI interactions while maintaining security and control over data access.
+
+Comparison with other protocols like Http
+Consider a scenario where you have to create 100 repos in github as a software engineer. The approach would be to access the api that github as an organization maintains. It would have been same for automating something in cloud as well.
+
+Why is it required?
+Standardization
+Similar to other protocol there is requirement for standard rules being followed when requests are carried out by llms as well.
+Context awareness
+Unlike software engineers using tools, the LLM must be provided with context for it know the whole situation (example for context would be databases if it involves one)
+Security
+There should be a proper way of authenticating the models similar to authenticating engineer with the aid of tokens or passwords.
+Abstraction
+Instead of the AI needing to know the specific details of each API it wants to use, MCP provides a standardized layer that hides complexity behind simple, semantic tool calls.
+
+
+const questionParser = (rawHtmlString = '') => {
+  if (rawHtmlString.indexOf("html('')") > 0) {
+    return [];
+  }
+
+  const htmlString = rawHtmlString.substring(rawHtmlString.indexOf('<tr'), rawHtmlString.lastIndexOf("');"));
+
+  const html = parse(
+    htmlString.replaceAll('\\"', '"').replaceAll('\\/', '/').replaceAll('\\n', '').replace(/\s+/g, ' ')
+  );
+
+  return html.querySelectorAll('.choose_question').map((childNode) => childNode.getAttribute('id'));
+};
+
+What is Model Context Protocol?
+Model Context Protocol, which is an open standard developed by Anthropic for connecting AI assistants to external data sources and tools. It allows AI models to securely access things like databases, APIs, file systems, and other services through a standardized interface, enabling more capable and contextual AI interactions while maintaining security and control over data access.
+
+Comparison with other protocols like Http
+Consider a scenario where you have to create 100 repos in github as a software engineer. The approach would be to access the api that github as an organization maintains. It would have been same for automating something in cloud as well.
+
+Why is it required?
+Standardization
+Similar to other protocol there is requirement for standard rules being followed when requests are carried out by llms as well.
+Context awareness
+Unlike software engineers using tools, the LLM must be provided with context for it know the whole situation (example for context would be databases if it involves one)
+Security
+There should be a proper way of authenticating the models similar to authenticating engineer with the aid of tokens or passwords.
+Abstraction
+Instead of the AI needing to know the specific details of each API it wants to use, MCP provides a standardized layer that hides complexity behind simple, semantic tool calls.
+
+
+const questionParser = (rawHtmlString = '') => {
+  if (rawHtmlString.indexOf("html('')") > 0) {
+    return [];
+  
+  const htmlString = rawHtmlString.substring(rawHtmlString.indexOf('<tr'), rawHtmlString.lastIndexOf("');"));
+
+  const html = parse(
+    htmlString.replaceAll('\\"', '"').replaceAll('\\/', '/').replaceAll('\\n', '').replace(/\s+/g, ' ')
+  );
+
+  return html.querySelectorAll('.choose_question').map((childNode) => childNode.getAttribute('id'));
+};
