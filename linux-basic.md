@@ -90,3 +90,117 @@ AWK là một công cụ mạnh mẽ để xử lý dữ liệu văn bản có c
 
 - awk '{print $3}': AWK in ra trường thứ ba của mỗi dòng
 - Chúng ta thêm pipes (|) và lệnh `head -n 5` để giới hạn hiển thị ở 5 dòng đầu tiên.
+
+## File permissions in Linux
+
+### Permissions for files and folder
+
+- Read – Can list all files and copy the files from directory
+- Write – Can add or delete files into directory (needs execute permission as well)
+- Execute – Can enter the directory
+
+### Understanding file permissions and ownership in Linux
+
+> -rwxrw-r-- 1 abhi itsfoss adsf 457 Aug 10 11:55 agatha.txt
+
+- File type: Denotes the type of file. d means directory, – means regular file, l means a symbolic link.
+- Permissions: This field shows the permission set on a file. I’ll explain it in detail in the next section.
+- Hard link count: Shows if the file has hard links. Default count is one.
+- User: The user who owns the files.
+- Group: The group that has access to this file. Only one group can be the owner of a file at a time.
+- File size: Size of the file in bytes.
+- Modification time: The date and time the file was last modified.
+- Filename: Obviously, the name of the file or directory.
+
+> rwxrw-r--
+
+- r : Read permissio
+- w : Write permissio
+- x : Execute permissio
+- – : No permission se
+
+### Change file permissions in Linux
+
+There are two ways to use the chmod command:
+
+- Absolute mode
+- Symbolic mode
+
+#### absolute mode
+
+- r (read) = 4
+- w (write) = 2
+- x (execute) = 1
+- – (no permission) = 0
+
+#### symbolic mode
+
+- u = user owner
+- g = group owner
+- o = other
+- a = all (user + group + other)
+
+Operators to perform the permission changes:
+
+- + for adding permissions
+- – for removing permissions
+- = for overriding existing permissions with new value
+
+> Ex: chmod o-rw+x,u+x agatha.txt
+
+### Change file ownership in Linux
+
+> chown <new_user_name>:<new_user_group> <filename>
+
+If you just want to change the group:
+
+> chown :<new_user_group> <filename>
+
+Or
+
+> chgrp <new_user_group> <filename>
+
+
+## Daemon
+
+Chương trình chạy nền (background process) — không có giao diện người dùng, không kết thúc khi đóng terminal.
+
+- sshd → daemon của SSH.
+- nginx → daemon của web server.
+- mysqld → daemon của MySQL.
+
+Daemon thường bắt đầu khi hệ thống khởi động và chạy mãi cho đến khi tắt máy.
+
+## Systemd
+
+Hệ thống init hiện đại trong Linux — nó chịu trách nhiệm khởi động toàn bộ hệ thống (bắt đầu từ PID 1).
+
+- Khi bạn bật máy, kernel → nạp systemd → systemd lần lượt khởi động các daemon, dịch vụ, socket, timer, mount… theo cấu hình.
+- Systemd quản lý mọi daemon, theo dõi trạng thái, restart nếu crash, ghi log, thiết lập dependency,...
+
+`systemd` = trình quản lý toàn bộ daemon & service trong hệ thống Linux.
+
+## Systemctl
+
+systemctl là công cụ dòng lệnh dùng để điều khiển systemd.
+
+- Không tương tác trực tiếp với systemd, mà thông qua lệnh systemctl.
+
+## Service
+“Service” là một loại daemon cụ thể, thường cung cấp chức năng nào đó (web, database, mail...).
+
+Trong Linux cũ (SysVinit), người ta dùng lệnh service để quản lý các service:
+
+> sudo service nginx start
+
+Trên Linux mới (dùng systemd), lệnh service chỉ là wrapper, thực chất gọi systemctl start nginx.
+
+### Relation
+
+```
+[systemctl]  ← (bạn gõ lệnh)
+     ↓
+[systemd]    ← (hệ thống init, quản lý dịch vụ)
+     ↓
+[daemon/service] ← (chạy thật, ví dụ nginx, sshd,...)
+```
