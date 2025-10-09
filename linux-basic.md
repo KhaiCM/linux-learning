@@ -204,3 +204,64 @@ Trên Linux mới (dùng systemd), lệnh service chỉ là wrapper, thực ch�
      ↓
 [daemon/service] ← (chạy thật, ví dụ nginx, sshd,...)
 ```
+
+## APT
+
+APT, hay Advanced Package Tool, là một hệ thống quản lý gói mạnh mẽ và được sử dụng rộng rãi trong các bản phân phối Linux dựa trên Debian, chẳng hạn như Ubuntu và Linux Mint. Nó đơn giản hóa quy trình cài đặt, cập nhật, nâng cấp và gỡ bỏ các gói phần mềm trên các hệ thống này.
+
+- Các chức năng chính của APT:
+     + Package Management: APT xử lý toàn bộ vòng đời của các gói phần mềm, từ khi cài đặt ban đầu đến khi gỡ bỏ, bao gồm quản lý các phần phụ thuộc giữa các gói.
+     + Repository Interaction: Nó truy xuất các gói từ các kho lưu trữ được chỉ định (các vị trí lưu trữ trực tuyến cho phần mềm) và đảm bảo hệ thống của bạn có quyền truy cập vào các phiên bản và bản cập nhật bảo mật mới nhất.
+     + Dependency Resolution: Khi cài đặt một gói, APT tự động xác định và cài đặt bất kỳ gói nào khác mà nó cần để hoạt động chính xác.
+     + Command-Line Interface: Mặc dù có các công cụ đồ họa, APT chủ yếu được sử dụng thông qua dòng lệnh bằng các lệnh như apt install, apt update, apt upgrade và apt remove
+
+### Phân biệt APT và APT-GET
+
+|Mục | apt-get | apt |
+|--------|-----------|----------------|
+| Lịch sử |Từ rất lâu (Debian 2.x, 1998) | Ubuntu 16.04 (Debian 8, 2014–2016) |
+| Mục tiêu thiết kế | Dành cho script, automation | Dành cho người dùng (CLI trực tiếp) |
+| Giao diện | Ít thông tin, không màu | Có thanh tiến trình, màu sắc, dễ đọc |
+| Tiện ích | Không có | Có thêm apt list, apt search, apt show (thay cho apt-cache) |
+
+## Phân biệt APT và DPKG
+
+| Công cụ | Cấp độ hoạt động | Chức năng chính | Phạm vi |
+|--------|-----------|----------------|------------------|
+| dpkg | Thấp (Low-level) | Quản lý file .deb trực tiếp (cài, gỡ, liệt kê)	Là nền tảng của toàn bộ hệ thống |
+| apt | Cao (High-level) | Quản lý gói + dependency + nguồn tải	Là “trình quản lý thông minh” dùng dpkg bên dưới |
+
+```
+[User]
+   ↓
+[apt / apt-get]      ← frontend (quản lý dependency, download, repo, xử lí logic)
+     - tìm gói trong repo
+     - tải về .deb
+     - kiểm tra dependency
+   ↓
+[dpkg]               ← backend (thực thi cài/gỡ file .deb)
+   ↓
+[Filesystem]         ← thực tế cài file vào /usr/bin, /etc, v.v.
+```
+
+Luồng hoạt động đằng sau apt install
+
+```
+User gõ: sudo apt install curl
+       │
+       ▼
+[1] apt đọc cache local(/var/lib/apt/lists/), repo → kiểm tra metadata
+       │
+[2] apt tính dependency → xác định cần tải gói nào
+       │
+[3] apt tải file .deb từ repository
+       │
+[4] apt gọi dpkg -i để cài từng gói
+       │
+[5] dpkg giải nén, ghi file, chạy script
+       │
+[6] apt cập nhật trạng thái cài đặt
+       ▼
+Hoàn tất → bạn có thể gõ "curl" để dùng
+```
+
